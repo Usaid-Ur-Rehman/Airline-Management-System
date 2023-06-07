@@ -22,11 +22,11 @@ namespace Airline_Management_System
     public partial class LOGIN : Form
     {
 
-
+        ServerLayer serverlayer;
         MyAccount myAccount;
+        Server server;
         public static LOGIN instance;
         public Label l1, id;
-        Server server;
         public LOGIN()
         {
             InitializeComponent();
@@ -41,17 +41,16 @@ namespace Airline_Management_System
         private void button1_Click(object sender, EventArgs e)
         {
             myAccount = new MyAccount();
+            serverlayer = new ServerLayer();
             server = new Server();
-            string ip;
-            string DB;
-            string usern;
-            string passw;
-            ip = "192.168.56.1";
-            DB = "AMS";
-            usern = "AMSadmin";
-            passw = "123456";
+            server.ShowDialog();
+            string IP = server.ip;
+            string DB = server.db;
+            string USER = server.user;
+            string PASS = server.pass;
 
-            string connectionString = string.Format(@"Data Source={0};Initial Catalog={1};User ID={2};Password={3};", ip, DB, usern, passw);
+            string connectionString = $"Data Source={IP};Initial Catalog={DB};User ID={USER};Password={PASS}";
+           
 
             //string Email, Pass_word;
             //Email = email.Text.Trim();

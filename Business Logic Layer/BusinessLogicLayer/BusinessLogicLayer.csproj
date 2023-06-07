@@ -49,6 +49,7 @@
     <Compile Include="PaymentDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="refund.cs" />
+    <Compile Include="ServerLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Data Access Layer\DataAccessLayer\DataAccessLayer.csproj">

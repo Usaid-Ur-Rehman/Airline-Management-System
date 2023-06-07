@@ -15,6 +15,7 @@ namespace Airline_Management_System
     public partial class SIGNUP : Form
     {
         public static SIGNUP instance;
+        Server server;
         public SIGNUP()
         {
             InitializeComponent();
@@ -26,6 +27,12 @@ namespace Airline_Management_System
             ltype.Hide();
             typelabel.Hide();
             type.Hide();
+            server = new Server();
+            server.ShowDialog();
+            string IP = server.ip;
+            string DB = server.db;
+            string USER = server.user;
+            string PASS = server.pass;
 
 
             string sql = "select * from SIGNUP_UP where type = '" + LOGIN.instance.l1.Text + "'";
@@ -34,7 +41,7 @@ namespace Airline_Management_System
 
 
 
-            SqlDataAdapter adapter = new SqlDataAdapter(sql, @"Data Source=DESKTOP-TI373IO\MSSQLSERVER01;Initial Catalog=AMS;User Id=AMSadmin;Password=123456;");
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, $"Data Source={IP};Initial Catalog={DB};User ID={USER};Password={PASS}");
 
             DataTable dataTable = new DataTable();
             adapter.Fill(dataTable);

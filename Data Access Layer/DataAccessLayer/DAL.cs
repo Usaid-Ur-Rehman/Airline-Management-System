@@ -8,14 +8,25 @@ using System.Data.SqlClient;
 using System.Configuration;
 
 
+
 namespace DataAccessLayer
 {
     public class DAL
     {
-        private static System.Collections.Hashtable SqlparamCache = System.Collections.Hashtable.Synchronized(new System.Collections.Hashtable());
-        private SqlConnection Connection = new SqlConnection();
 
+
+
+
+
+        
+
+        private static System.Collections.Hashtable SqlparamCache = System.Collections.Hashtable.Synchronized(new System.Collections.Hashtable());
+        public SqlConnection Connection = new SqlConnection();
         public static string ConnectionString = (@"Data Source=DESKTOP-TI373IO\MSSQLSERVER01;Initial Catalog=AMS;User Id=AMSadmin;Password=123456;");
+    
+        
+       
+       
 
         private SqlCommand DbCommand = new SqlCommand();
         private SqlDataAdapter DtAdapter = new SqlDataAdapter();
@@ -86,29 +97,38 @@ namespace DataAccessLayer
 
 
 
-        public bool OpenConnection()
+        public void OpenConnection()
         {
             try
             {
-                if (Connection.State == ConnectionState.Open) return true;
-                Connection = new SqlConnection();
+                if (string.IsNullOrEmpty(ConnectionString))
+                {
+                    throw new Exception("DAL:OpenConnection:The ConnectionString property has not been initialized.");
+                }
+
+                if (Connection.State == ConnectionState.Open)
+                    return;
+
                 Connection.ConnectionString = ConnectionString;
                 Connection.Open();
+
                 if (Connection.State == ConnectionState.Open)
                 {
                     DbCommand.Connection = Connection;
-                    return true;
                 }
                 else
                 {
-                    return false;
+                    throw new Exception("DAL:OpenConnection:Failed to open the database connection.");
                 }
             }
-            catch (System.Exception ee)
+            catch (Exception ex)
             {
-                throw new System.Exception("Database:OpenConnection:" + ee.Message);
+                throw new Exception("DAL:OpenConnection:" + ex.Message);
             }
         }
+
+
+
 
         public void CloseConnection()
         {
