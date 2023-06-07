@@ -15,7 +15,7 @@ namespace DataAccessLayer
         private static System.Collections.Hashtable SqlparamCache = System.Collections.Hashtable.Synchronized(new System.Collections.Hashtable());
         private SqlConnection Connection = new SqlConnection();
 
-        public static string ConnectionString = System.Configuration.ConfigurationManager.AppSettings["dbCon"].ToString();
+        public static string ConnectionString = (@"Data Source=DESKTOP-TI373IO\MSSQLSERVER01;Initial Catalog=AMS;User Id=AMSadmin;Password=123456;");
 
         private SqlCommand DbCommand = new SqlCommand();
         private SqlDataAdapter DtAdapter = new SqlDataAdapter();
