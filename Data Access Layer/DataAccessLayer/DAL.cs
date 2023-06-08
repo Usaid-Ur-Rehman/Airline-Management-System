@@ -13,20 +13,27 @@ namespace DataAccessLayer
 {
     public class DAL
     {
-
-
-
+      
 
 
         
 
         private static System.Collections.Hashtable SqlparamCache = System.Collections.Hashtable.Synchronized(new System.Collections.Hashtable());
-        public SqlConnection Connection = new SqlConnection();
-        public static string ConnectionString = (@"Data Source=DESKTOP-TI373IO\MSSQLSERVER01;Initial Catalog=AMS;User Id=AMSadmin;Password=123456;");
-    
         
-       
-       
+        // public static string ConnectionString = (@"Data Source=DESKTOP-TI373IO\MSSQLSERVER01;Initial Catalog=AMS;User Id=AMSadmin;Password=123456;");
+        public static string ConnectionString;
+        private SqlConnection Connection = new SqlConnection();
+        public void SetConnectionString(string ip, string db, string user,string pass)
+        {
+             ConnectionString = $"Data Source={ip};Initial Catalog={db};User ID={user};Password={pass}";
+
+
+        }
+
+
+
+
+
 
         private SqlCommand DbCommand = new SqlCommand();
         private SqlDataAdapter DtAdapter = new SqlDataAdapter();

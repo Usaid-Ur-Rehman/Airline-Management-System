@@ -23,8 +23,8 @@ namespace BusinessLogicLayer
         {
 
 
-            string connectionString = $"Data Source={ip};Initial Catalog={db};User ID={user};Password={pass}";
-           // dataAccessLayer.SetConnectionString(connectionString);
+            dataAccessLayer = new DAL();
+            dataAccessLayer.SetConnectionString(ip,db,user,pass);
 
 
         }
